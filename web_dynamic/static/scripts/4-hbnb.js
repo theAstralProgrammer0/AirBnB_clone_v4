@@ -22,7 +22,7 @@ $(document).ready(function () {
     });
   
     // Check the API status
-    $.getJSON('http://192.168.0.113:5001/api/v1/status/', (data) => {
+    $.getJSON('http://0.0.0.0:5001/api/v1/status/', (data) => {
       if (data.status === 'OK') {
         $('#api_status').addClass('available');
       } else {
@@ -33,7 +33,7 @@ $(document).ready(function () {
     // Fetch and display places
     function fetchPlaces(amenities = {}) {
       $.ajax({
-        url: 'http://192.168.0.113:5001/api/v1/places_search/',
+        url: 'http://0.0.0.0:5001/api/v1/places_search/',
         type: 'POST',
         contentType: 'application/json',
         data: JSON.stringify({ amenities: Object.keys(amenities) }),
