@@ -7,6 +7,7 @@ from models.amenity import Amenity
 from os import environ
 from flask import Flask, render_template
 import uuid
+
 app = Flask(__name__)
 
 @app.teardown_appcontext
@@ -14,7 +15,7 @@ def close_db(error):
     """ Remove the current SQLAlchemy Session """
     storage.close()
 
-@app.route('/100-hbnb', strict_slashes=False)
+@app.route('/101-hbnb', strict_slashes=False)
 def hbnb():
     """ HBNB is alive! """
     states = storage.all(State).values()
@@ -29,7 +30,7 @@ def hbnb():
 
     cache_id = str(uuid.uuid4())
 
-    return render_template('100-hbnb.html',
+    return render_template('101-hbnb.html',
                            states=st_ct,
                            amenities=amenities,
                            cache_id=cache_id)
