@@ -22,7 +22,7 @@ $(document).ready(function () {
     });
   
     // Check the API status
-    $.getJSON('http://localhost:5001/api/v1/status/', (data) => {
+    $.getJSON('http://192.168.0.113:5001/api/v1/status/', (data) => {
       if (data.status === 'OK') {
         $('#api_status').addClass('available');
       } else {
@@ -31,12 +31,12 @@ $(document).ready(function () {
     });
   
     // Fetch and display places
-    function fetchPlaces() {
+    function fetchPlaces(amenities = {}) {
       $.ajax({
         url: 'http://192.168.0.113:5001/api/v1/places_search/',
         type: 'POST',
         contentType: 'application/json',
-        data: JSON.stringify({}),
+        data: JSON.stringify({ amenities: Object.keys(amenities) }),
         success: function (data) {
           $('.places').empty(); // Clear previous places
           for (const place of data) {
@@ -66,5 +66,8 @@ $(document).ready(function () {
   
     // Initial fetch of places
     fetchPlaces();
+
+    $('button').click(function () {
+      fetchPlaces(selectedAmenities);
+    });
   });
-  
